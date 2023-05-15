@@ -10,7 +10,7 @@ passport.use( new LocalStrategy({
     .then((user)=>{
         if(user.password == password){
 
-            console.log("user found: ", user)
+            // console.log("user found: ", user)
             
            return done(null, user);
         }
@@ -26,12 +26,12 @@ passport.use( new LocalStrategy({
 
 
 passport.serializeUser(function(user, done){
-    console.log("serializeUser", user)
+    // console.log("serializeUser", user)
     done(null, user.id);
 })
 
 passport.deserializeUser(function(id, done){
-    console.log("serializeUser", id)
+    // console.log("serializeUser", id)
     User.findById(id)
     .then((user)=>{
         done(null, user)

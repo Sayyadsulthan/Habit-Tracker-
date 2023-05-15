@@ -1,5 +1,22 @@
 <h3>home page</h3>
 <form action="/habit/create" method="post">
-    <input type="text" name="name" placeholder="write habit here">
+    <input type="text" name="content" placeholder="write habit here">
     <input type="submit" value="create">
 </form>
+
+<div>
+    <ul>
+
+       <% for(i=0; i< habits.length; i++ ){ %>
+            <li>
+                <p>
+                    <%=habits[i].content %>
+                </p>
+                <p>
+                    <a href="/habit/destroy/<%= habits[i].id %>">remove</a>
+                </p>
+            </li>
+
+        <% } %>
+    </ul>
+</div>

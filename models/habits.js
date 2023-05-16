@@ -11,7 +11,7 @@ const habitSchema = new mongoose.Schema({
         default: false
     },
     currentStatus: [{
-        date: Date,
+        date: String,
         state: String
     }]
 },{

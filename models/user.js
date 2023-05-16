@@ -16,7 +16,7 @@ const userSchema =new  mongoose.Schema({
     },
     habits: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'habit'
+        ref: 'Habit'
     }]
 },{
     timestamps:true

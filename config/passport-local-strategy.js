@@ -8,13 +8,15 @@ passport.use( new LocalStrategy({
 }, function(email, password, done){
     User.findOne({email: email})
     .then((user)=>{
-        if(user.password == password){
+        if(!user){
 
             // console.log("user found: ", user)
-            
-           return done(null, user);
+            return done(null, false);
         }
-        return done(null, false);
+        if(user && user.password == password){
+
+            return done(null, user);
+        }
     })
 
     .catch((err)=>{

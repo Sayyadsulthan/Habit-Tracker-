@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: antiquewhite !important;
 }
 body header {
   position: sticky;
@@ -17,42 +18,19 @@ body header ul {
 body header ul li {
   margin: 5px;
 }
+body .sign-in-out {
+  font-weight: 500;
+}
+body .sign-in-out a {
+  color: black;
+  border: 0.5px solid black;
+  padding: 3px;
+  border-radius: 1rem;
+  background-color: rgb(170, 222, 135);
+}
 body main {
   padding: 30px;
-  min-height: 80vh;
+  min-height: 100vh;
   background-color: antiquewhite;
   text-align: center;
-}
-body main form {
-  margin: auto;
-  width: 60%;
-  border: 1px solid black;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-}
-body main form div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-}
-body main form div input {
-  width: 70%;
-}
-body main form div label {
-  width: 30%;
-}
-body footer {
-  background-color: aqua;
-  height: auto;
-}
-body footer ul {
-  display: flex;
-  margin: auto;
-  padding-bottom: 5px;
-  list-style: none;
-}
-body footer ul li {
-  margin: 5px;
 }

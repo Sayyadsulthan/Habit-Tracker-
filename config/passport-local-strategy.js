@@ -41,7 +41,7 @@ passport.deserializeUser(function(id, done){
     .catch((err)=>console.log("**err in deserialize: ", err))
 })
 
-passport.chekAuthentication = function(req, res, next){
+passport.checkAuthentication = function(req, res, next){
     if(req.isAuthenticated()){
        return next();
     }

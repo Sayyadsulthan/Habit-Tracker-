@@ -4,6 +4,28 @@ body {
 body a {
   text-decoration: none;
 }
+body #weekliTrack {
+  background-color: blueviolet;
+  width: 200px;
+  text-align: center;
+  margin: 10px auto;
+  border-radius: 0.5rem;
+  padding: 10px;
+}
+body #weekliTrack a {
+  color: aliceblue;
+  font-family: sans-serif;
+  font-weight: 800;
+  font-size: larger;
+}
+body #create-habit {
+  padding: 10px;
+}
+body #create-habit input {
+  height: auto;
+  border-radius: 10px;
+  padding: 5px;
+}
 body form {
   margin-bottom: 10px !important;
 }

@@ -45,6 +45,30 @@ module.exports.destroySession = function (req, res, next) {
 
         return res.redirect("/");
     });
+}
 
 
+module.exports.password_reset = function(req, res){
+    return res.render("password_reset");
+}
+
+module.exports.forgotPass =async function(req, res){
+    try{
+        let user=  await User.findOne({email: req.body.email});
+
+        if(user.name == req.body.name){
+            user.password = req.body.password;
+            user.save();
+
+            console.log("password changed successfully..");
+            return res.redirect('/users/sign-in');
+        }else{
+            console.log("user not found..");
+            return res.redirect("back");
+        }
+
+    }catch(err){
+        console.log("err in finding user user: ", err);
+        return res.redirect("back");
+    }
 }

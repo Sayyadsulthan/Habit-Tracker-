@@ -1,6 +1,24 @@
 const Habit = require('../models/habits');
 const User = require('../models/user');
 
+module.exports.dashBoardIndex = async function (req, res) {
+    if (req.isAuthenticated()) {
+        try {
+            weekName=['sun','mon','tue','wed','thu','fry','sat'];
+            let user = await User.findById(req.user.id).populate('habits').exec();
+            return res.render('habit-dashboard', {
+                habits: user.habits,
+                weekNames:weekName
+            });
+        } catch (err) {
+            console.log("err ***:", err);
+            return res.redirect("back");
+        }
+    } else {
+        console.log("Internale server Error");
+        return res.redirect("back");
+    }
+}
 
 module.exports.create = async function (req, res) {
     try {
@@ -12,18 +30,18 @@ module.exports.create = async function (req, res) {
             let user = await User.findById(req.user.id);
             user.habits.push(habit);
             let date = new Date();
-           
+
             // console.log(newDate);
-            for(i=0; i<7; i++ ){
-                let dd =date.getDate();
-                let mm= date.getMonth()+1;
-                let yyy =date.getFullYear();
-                if(i == date.getDay()){
-                    let newDate = dd +'/'+ mm +'/'+ yyy ;
+            for (i = 0; i < 7; i++) {
+                let dd = date.getDate();
+                let mm = date.getMonth() + 1;
+                let yyy = date.getFullYear();
+                if (i == date.getDay()) {
+                    let newDate = dd + '/' + mm + '/' + yyy;
                     habit.currentStatus.push({ date: newDate, state: "undefine" });
-                }else{
-                    dd+= (i- date.getDay());
-                    let newDate = dd +'/'+ mm +'/'+ yyy ;
+                } else {
+                    dd += (i - date.getDay());
+                    let newDate = dd + '/' + mm + '/' + yyy;
                     habit.currentStatus.push({ date: newDate, state: "undefine" });
                 }
             }
@@ -35,7 +53,7 @@ module.exports.create = async function (req, res) {
             return res.redirect('back');
 
         }
-        console.log("Internal server ERR***")
+        // console.log("Internal server ERR***")
         return res.redirect('back');
 
     } catch (err) {
@@ -99,9 +117,9 @@ module.exports.faovurite = async function (req, res) {
 
 module.exports.status = async function (req, res) {
     try {
-        console.log("day in number: ",req.query.day);
-        console.log("habitId: ",req.query.habitId);
-        console.log("date :",req.query.date)
+        console.log("day in number: ", req.query.day);
+        console.log("habitId: ", req.query.habitId);
+        console.log("date :", req.query.date)
         if (req.isAuthenticated()) {
             let day = req.query.day;
             let date = req.query.date;
@@ -111,32 +129,32 @@ module.exports.status = async function (req, res) {
             // console.log(habit.currentStatus.length)
             // if (habit.currentStatus) {
 
-                // for (i of habit.currentStatus) {
-                    // if (habit[day].date == date) {
-                        switch (habit.currentStatus[day].state) {
-                            case "true": {
-                                habit.currentStatus[day].state = "false";
-                                habit.save();
-                                console.log("habit state false..")
-                                return res.redirect('back');
-                            }
-                            case "false": {
-                                habit.currentStatus[day].state = "undefine";
-                                habit.save();
-                                console.log("habit state undefine..")
-                                return res.redirect('back');
-                            }
-                            default: {
-                                habit.currentStatus[day].state = "true";
-                                habit.save();
-                                console.log("habit state true..")
-                                return res.redirect('back');
-                            }
+            // for (i of habit.currentStatus) {
+            // if (habit[day].date == date) {
+            switch (habit.currentStatus[day].state) {
+                case "true": {
+                    habit.currentStatus[day].state = "false";
+                    habit.save();
+                    console.log("habit state false..")
+                    return res.redirect('back');
+                }
+                case "false": {
+                    habit.currentStatus[day].state = "undefine";
+                    habit.save();
+                    console.log("habit state undefine..")
+                    return res.redirect('back');
+                }
+                default: {
+                    habit.currentStatus[day].state = "true";
+                    habit.save();
+                    console.log("habit state true..")
+                    return res.redirect('back');
+                }
 
-                        }
+            }
 
-                    // }
-                // }
+            // }
+            // }
             // } else {
 
             //     habit.currentStatus.push({ date: date, state: 'true' })
@@ -147,12 +165,12 @@ module.exports.status = async function (req, res) {
 
             // return res.redirect("back");
 
-        }else{
+        } else {
             console.log("Internal server ERR***")
-        return res.redirect('back');
+            return res.redirect('back');
         }
 
-        
+
 
     } catch (err) {
         console.log("err in status habit", err)

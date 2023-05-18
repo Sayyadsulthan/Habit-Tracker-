@@ -1,7 +1,9 @@
 <link rel="stylesheet" href="/css/home.css">
 
-<h3>home page</h3>
-<form action="/habit/create" method="post">
+<h3>Daily Habits</h3>
+<div id="weekliTrack"><a href="/habit">Weekly Tracker</a></div>
+
+<form id="create-habit" action="/habit/create" method="post">
     <input type="text" name="content" placeholder="write habit here">
     <input type="submit" value="create">
 </form>
@@ -30,13 +32,13 @@
                     <div id="status-div">
 
                         <a href="/habit/status/?day=<%= date.getDay()%>&habitId=<%=habit.id %>&date=<%= date.getDate() %>">
-                            <% if(habit.currentStatus[date.getDay()].state == "empty" || habit.currentStatus[date.getDay()].state == "undefine" ){ %>
+                            <% if(habit.currentStatus[date.getDay()].state == "false" ){ %>
                                 
-                                <i class="fa-sharp fa-solid fa-hourglass"></i>
+                                <i class="fa-sharp fa-solid fa-xmark fa-lg" style="color: red;"></i> 
                                 <% }else if(habit.currentStatus[date.getDay()].state == "true"){ %>
-                                    <i class="fa-solid fa-square-check" ></i>
+                                    <i class="fa-solid fa-square-check"  style="color: green;"></i>
                                     <% }else{ %>
-                                        <i class="fa-sharp fa-solid fa-xmark fa-lg"></i>
+                                        <i class="fa-sharp fa-solid fa-hourglass" style="color: cornflowerblue;"></i>
 
                                         <% } %>
                                         <%# habit.currentStatus[date.getDay()].state %>

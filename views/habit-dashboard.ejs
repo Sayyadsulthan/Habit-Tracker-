@@ -1,16 +1,73 @@
+<link rel="stylesheet" href="/css/habit.css">
+<h1><a href="/">
+    <i class="fa-solid fa-house"></i>
+</a></h1>
 
-<div id="main-container">
-
-    <section id="upper-section">
-        <ul>
-            <li><a href="/">Home</a></li>
-        </ul>
-    </section>
-
-    <section id="content-section">
-        
-        <div>
-
-        </div>
-    </section>
+<div id="status-details-main">
+    <div class="status-details-child">
+        <small>Completed status:</small>
+        <small><i class="fa-solid fa-square-check" ></i></small>
+    </div>
+    <div class="status-details-child">
+        <small>Not-Completed Status:</small>
+        <small><i class="fa-sharp fa-solid fa-xmark fa-lg"></i></small>
+    </div>
+    <div class="status-details-child">
+        <small>Waiting Status:</small>
+        <small><i class="fa-sharp fa-solid fa-hourglass"></i></small>
+    </div>
 </div>
+<section>
+    <h1>weekly tasks:-</h1>
+    <ul>
+        <% for(habit of habits){ %>
+
+             <li> 
+                   
+                <div id="content-div">
+                    <%= habit.content %>
+                        
+                </div>
+                  
+                <div id="status-div"> 
+                        <% for(let i=0; i< 7; i++){ %>
+
+                        <div class="weekDays">
+                            <small><%= weekNames[i] %></small>
+                            <small class="status">
+                                <div>
+                                    <a href="/habit/status/?day=<%= i%>&habitId=<%=habit.id %>&date=<%= habit.currentStatus[i].date %>">                                
+                                         <% if(habit.currentStatus[i].state == "false" ){ %>
+                                            
+                                            <i class="fa-sharp fa-solid fa-xmark fa-lg" style="color: red;"></i>
+                                        <% }else if(habit.currentStatus[i].state == "true"){ %>
+                                            <i class="fa-solid fa-square-check" style="color: green;" ></i>
+                                        <% }else{ %>
+                                            <i class="fa-sharp fa-solid fa-hourglass" style="color: cornflowerblue;"></i>       
+                                        <% } %>
+                                    </a>
+                                </div>
+                            </small>
+                        </div>
+                        
+                        <% } %>
+                    </div>
+                
+                <div id="fav_delete-div">
+
+                    <small><a href="/habit/favourite/<%= habit._id %>">
+                        <% if(habit.favourite == true){ %>
+                            
+                            <i class="fa-solid fa-bookmark"></i>
+                            <% }else{ %>
+                                <i class="fa-regular fa-bookmark"></i>
+                                <% } %>
+                </a></small>
+                <small><a href="/habit/destroy/<%=habit.id %> ">
+                    <i class="fa-sharp fa-solid fa-trash-can"></i>
+                </a></small>
+            </div>
+            </li>
+        <% } %>
+    </ul>
+</section>

@@ -1,5 +1,4 @@
-    <h3>Sign-up</h3>
-<form action="/users/create" method="post">
+<!-- <form action="/users/create" method="post">
     <div>
         <label for="username">username</label>
         <input id="username" type="text" name="name" placeholder="enter name">
@@ -20,4 +19,29 @@
 
         <input type="submit" value="sign-up">
     </div>
-</form>
+</form> -->
+<link rel="stylesheet" href="/css/sign_in.css">
+<main>
+    <div class="row">
+        <div class="colm-logo">
+            <img src="/img/logo.jpg" alt="Logo">
+            <h2>Habit Tracker helps you Track  your daily routine and Track them.</h2>
+        </div>
+        <div class="colm-form">
+            <div class="form-container">
+                <form action="/users/create" method="post">
+
+                    <input type="text" name="name" placeholder="Enter name">
+                    <input type="email" name="email" placeholder="Email address">
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="confirm_password" placeholder="Confirm Password">
+                    <button class="btn-login">Register</button>
+                </form>
+                <a href="/users/password_reset">Forgotten password?</a>
+                <a href="/users/sign-in">
+                    <button class="btn-new">Login</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>

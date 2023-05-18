@@ -1,12 +1,12 @@
 <header>
-    <ul>
+    <ul id="nav-user">
     <% if(locals.user){ %>
-            <li><%= locals.user.name %></li>
-            <li><%= locals.user.email %></li>
-            <li><a href="/users/sign-out">Sign-out</a></li>
+            <li id="user-name"><%= locals.user.name %></li>
+            <li id="user-email"><%= locals.user.email %></li>
+            <li class="sign-in-out"><a href="/users/sign-out">Sign-out</a></li>
             <% }else{ %>
-                <li><a href="/users/sign-up">Sign-up</a></li>
-                <li><a href="/users/sign-in">Sign-in</a></li>
+                <li ><h1> Habit Tracker Application </h1></li>
+                <li ></a></li>
            <% } %>
         </ul>
     </header>

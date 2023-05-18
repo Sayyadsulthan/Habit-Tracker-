@@ -7,17 +7,22 @@ const passportLocals = require('./config/passport-local-strategy');
 const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
+const customMware = require('./config/custom_middleware');
 
 app.use(express.urlencoded({extended:true}))
+app.use(expressLayouts);
+
+app.use(express.static('./assets'));
+
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
+
+
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.use(expressLayouts);
 
-app.set('Layout extractStyles', true);
-app.set('Layout extractScripts', true);
-
-app.use(express.static('./assets'))
 
 // mongostore is used to store the session in the db
 app.use(session({
@@ -44,8 +49,11 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+app.use(flash());
+app.use(customMware.setFlash);
 
-app.use('/', require('./routes'))
+
+app.use('/', require('./routes'));
 
 app.listen(port, function(err){
     if(err){

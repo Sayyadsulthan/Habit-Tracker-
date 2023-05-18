@@ -16,36 +16,41 @@ module.exports.create = async function (req, res) {
 
                 await User.create(req.body)
 
+                req.flash('success',"user created successfully...");
                 return res.redirect("/users/sign-in");
             } else {
+                req.flash('error',"password don't match!!");
                 return res.redirect("back");
             }
         }
 
-        console.log("user already exist!");
+        req.flash('error',"user already exist!");
         return res.redirect('/');
     } catch (err) {
-        console.log("err in creating user: ", err);
+        req.flash('error', err);
         return res.redirect("back");
     }
 }
 
 module.exports.createSession = function (req, res) {
-    console.log(req.body)
+    req.flash('success', 'successfully logged in');
     return res.redirect('/');
 }
 
-module.exports.destroySession = function (req, res, next) {
 
+// used logout and destroy session
+module.exports.destroySession = function (req, res, next) {
     req.logout(function (err) {
         if (err) {
             return next(err);
         }
-        console.log('success', 'You have logged out !');
 
-        return res.redirect("/");
+        req.flash('success', 'You have logged out !');
+        return res.redirect("/users/sign-in");
     });
+
 }
+
 
 
 module.exports.password_reset = function(req, res){
@@ -60,15 +65,15 @@ module.exports.forgotPass =async function(req, res){
             user.password = req.body.password;
             user.save();
 
-            console.log("password changed successfully..");
+            req.flash('success',"password changed successfully..");
             return res.redirect('/users/sign-in');
         }else{
-            console.log("user not found..");
+            req.flash('error',"user not found..");
             return res.redirect("back");
         }
 
     }catch(err){
-        console.log("err in finding user user: ", err);
+        req.flash('error', err);
         return res.redirect("back");
     }
 }

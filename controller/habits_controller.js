@@ -11,11 +11,11 @@ module.exports.dashBoardIndex = async function (req, res) {
                 weekNames:weekName
             });
         } catch (err) {
-            console.log("err ***:", err);
+            req.flash('error', err);
             return res.redirect("back");
         }
     } else {
-        console.log("Internale server Error");
+        req.flash('error',"Internale server Error");
         return res.redirect("back");
     }
 }
@@ -49,15 +49,15 @@ module.exports.create = async function (req, res) {
             // habit.currentStatus[date.getDay()].date= newDate;
             habit.save();
             user.save();
-            console.log("habit created....");
+            req.flash('success', 'habit created...');
             return res.redirect('back');
 
         }
-        // console.log("Internal server ERR***")
+        req.flash('error',"Internal server ERR***")
         return res.redirect('back');
 
     } catch (err) {
-        console.log("err in create habit", err)
+        req.flash('error', err)
         return res.redirect('back')
     }
 }
@@ -71,16 +71,16 @@ module.exports.destroy = async function (req, res) {
             user.habits.splice(habitIndex, 1);
             await habit.deleteOne();
             user.save();
-            console.log("habit removed succesfully...");
+            req.flash('success', 'habit removed succesfully...');
             return res.redirect('back');
 
         }
 
-        console.log("Internal server ERR***")
+        req.flash('error',"Internal server ERR***");
         return res.redirect('back');
 
     } catch (err) {
-        console.log("err in removing habit", err)
+        req.flash('error', err);
         return res.redirect('back')
     }
 }
@@ -88,92 +88,71 @@ module.exports.destroy = async function (req, res) {
 module.exports.faovurite = async function (req, res) {
     try {
         if (req.user) {
-
             let habit = await Habit.findById(req.params.id);
             switch (habit.favourite) {
                 case true: {
                     habit.favourite = false;
                     habit.save();
-                    console.log("habit added to favourite ...");
+                    req.flash('success', "habit added to favourite ...")
                     return res.redirect('back');
                 }
                 case false: {
                     habit.favourite = true;
                     habit.save();
-                    console.log("habit removed from favourite ...");
+                    req.flash('success', "habit removed from favourite ...")
                     return res.redirect('back');
                 }
             }
         }
 
-        console.log("Internal server ERR***")
+        req.flash('error', "Internal server ERR***")
         return res.redirect('back');
 
     } catch (err) {
-        console.log("err in favourite habit", err)
+        req.flash('error', err);
         return res.redirect('back')
     }
 }
 
 module.exports.status = async function (req, res) {
     try {
-        console.log("day in number: ", req.query.day);
-        console.log("habitId: ", req.query.habitId);
-        console.log("date :", req.query.date)
+
         if (req.isAuthenticated()) {
             let day = req.query.day;
             let date = req.query.date;
             let habitId = req.query.habitId;
             let habit = await Habit.findById(habitId);
 
-            // console.log(habit.currentStatus.length)
-            // if (habit.currentStatus) {
-
-            // for (i of habit.currentStatus) {
-            // if (habit[day].date == date) {
             switch (habit.currentStatus[day].state) {
                 case "true": {
                     habit.currentStatus[day].state = "false";
                     habit.save();
-                    console.log("habit state false..")
+                    // console.log("habit state false..")
+                    req.flash('error', 'habit Not Completed!!');
                     return res.redirect('back');
                 }
                 case "false": {
                     habit.currentStatus[day].state = "undefine";
                     habit.save();
-                    console.log("habit state undefine..")
+                    req.flash('error', 'habit Not Completed!!');
                     return res.redirect('back');
                 }
                 default: {
                     habit.currentStatus[day].state = "true";
                     habit.save();
-                    console.log("habit state true..")
+                    req.flash('success', 'habit comlpeted..');
                     return res.redirect('back');
                 }
 
             }
 
-            // }
-            // }
-            // } else {
-
-            //     habit.currentStatus.push({ date: date, state: 'true' })
-            //     habit.save()
-            //     console.log("habit state true..");
-            //     return res.redirect('back');
-            // }
-
-            // return res.redirect("back");
-
         } else {
-            console.log("Internal server ERR***")
+            req.flash('error',"Internal server ERR***");
             return res.redirect('back');
         }
 
-
-
     } catch (err) {
-        console.log("err in status habit", err)
+        req.flash('error', err);
         return res.redirect('back')
     }
 }

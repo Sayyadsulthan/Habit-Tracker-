@@ -5,8 +5,8 @@ body{
 
     
     header{
-        position: sticky;
-        top: 0px;
+        position: fixed;
+        width: 100vw;
         padding: 0;
         background-color: aqua;
         height: auto;

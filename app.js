@@ -1,5 +1,9 @@
 const express = require('express');
-const port = 8000;
+const env = require('dotenv');
+
+env.config();
+
+const PORT = process.env.PORT || 8000;
 const app = express();
 const db = require('./config/mongoose');
 const passport = require('passport');
@@ -55,11 +59,11 @@ app.use(customMware.setFlash);
 
 app.use('/', require('./routes'));
 
-app.listen(port, function(err){
+app.listen(PORT, function(err){
     if(err){
         console.log("err in listening server");
     }
 
-    console.log(" listening server listening on port: ", port);
+    console.log(" listening server listening on port: ", PORT);
 
 })

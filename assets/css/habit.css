@@ -41,7 +41,7 @@ section ul li div {
 /* p{
     padding: 0px;
 } */
-div {
+.border-class {
   display: flex;
   border: 0.3px solid black;
   margin: 0;
@@ -115,7 +115,7 @@ div {
 
 #status-details-main {
   display: flex;
-  background-color: aquamarine !important;
+  background-color: aquamarine;
   justify-content: space-around;
   font-weight: 900;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;

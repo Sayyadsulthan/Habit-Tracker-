@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="/css/home.css">
+
+<h1><a href="/" style="color: black;">
+    <i class="fa-solid fa-house" ></i>
+</a></h1>
+<section>
+    <% let checkexist_fav = false %>
+    <% for(habit of habits){ %>
+        <% if(habit.favourite == true){ %>
+            <% checkexist_fav = true %>
+        <div id="status-details-main">
+            <div class="status-details-child">
+                <small>Completed status:</small>
+                <small><i class="fa-solid fa-square-check" ></i></small>
+            </div>
+            <div class="status-details-child">
+                <small>Not-Completed Status:</small>
+                <small><i class="fa-sharp fa-solid fa-xmark fa-lg"></i></small>
+            </div>
+            <div class="status-details-child">
+                <small>Waiting Status:</small>
+                <small><i class="fa-sharp fa-solid fa-hourglass"></i></small>
+            </div>
+        </div>
+        <ul>
+            
+            <% for(habit of habits){ %>
+
+                <li> 
+                    <p>
+                        <div id="status-div">
+
+                            <a href="/habit/status/?day=<%= date.getDay()%>&habitId=<%=habit.id %>&date=<%= date.getDate() %>">
+                                <% if(habit.currentStatus[date.getDay()].state == "false" ){ %>
+                                    
+                                    <i class="fa-sharp fa-solid fa-xmark fa-lg" style="color: red;"></i> 
+                                    <% }else if(habit.currentStatus[date.getDay()].state == "true"){ %>
+                                        <i class="fa-solid fa-square-check"  style="color: green;"></i>
+                                        <% }else{ %>
+                                            <i class="fa-sharp fa-solid fa-hourglass" style="color: cornflowerblue;"></i>
+
+                                            <% } %>
+                                            <%# habit.currentStatus[date.getDay()].state %>
+                                        </a>
+                        </div>
+                    
+                    <div id="content-div"> 
+                        <small> <%= habit.content %>  </small> 
+                        <small> <%= habit.currentStatus[date.getDay()].date %> </small> 
+                    </div>
+                    
+                    <div id="fav_delete-div">
+
+                        <small><a href="/habit/favourite/<%= habit._id %>">
+                            <% if(habit.favourite == true){ %>
+                                
+                                <i class="fa-solid fa-bookmark"></i>
+                                <% }else{ %>
+                                    <i class="fa-regular fa-bookmark"></i>
+                                    <% } %>
+                                </a></small>
+                                <small><a href="/habit/destroy/<%=habit.id %> ">
+                                    <i class="fa-sharp fa-solid fa-trash-can"></i>
+                                </a></small>
+                    </div>
+                </p>
+                </li>
+            <% } %>
+        </ul>
+        <% } %>
+        <% } %>
+       <% if(!checkexist_fav){ %>
+           <h1> Nothing is found in Favourite..</h1>
+       <% } %>
+</section>

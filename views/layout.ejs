@@ -26,11 +26,17 @@
         <main>
             <%- body %>
         </main>
-        <%= flash.success %>
-        <%= flash.error %>
+        
+
+
+
+
+
+        <%- script %>
+
+        
         <script>
             
-
         <% if (flash.success && flash.success.length > 0) {  %>
                     new Noty({
 
@@ -57,7 +63,6 @@
         <!-- using partials to footer -->
         <!-- <%# include('_footer'); %> -->
 
-        <%- script %>
 </body>
 
 </html>

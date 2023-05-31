@@ -38,8 +38,7 @@ section ul li {
 /* p{
     padding: 0px;
 } */
-div{
-    
+.border-class{
     display: flex;
     border: 0.3px solid black;
     margin: 0;
@@ -51,6 +50,7 @@ div{
     margin: 5px;
     border-radius: 0.5rem;
 }
+
 #fav_delete-div {
     width: 10%;
     flex-wrap: wrap;
@@ -104,7 +104,7 @@ div{
 
 #status-details-main{
     display: flex;
-    background-color: aquamarine !important;
+    background-color: aquamarine ;
     justify-content: space-around;
     font-weight: 900;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

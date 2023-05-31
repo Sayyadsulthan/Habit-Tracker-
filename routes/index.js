@@ -8,4 +8,6 @@ router.get('/',passport.checkAuthentication, homeController.index );
 router.use('/users', require('./user'));
 router.use('/habit', require('./habit'));
 
+router.use('/favourite', require('./favourite'))
+
 module.exports =router;

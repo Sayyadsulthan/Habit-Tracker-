@@ -2,7 +2,8 @@
     <ul id="nav-user">
     <% if(locals.user){ %>
             <li id="user-name"><%= locals.user.name %></li>
-            <li id="user-email"><%= locals.user.email %></li>
+            <li ><a href="/favourite/Dashboard"> favourite</a></li>
+            <li ><a href="/"> home</a></li>
             <li class="sign-in-out"><a href="/users/sign-out">Sign-out</a></li>
             <% }else{ %>
                 <li ><h1> Habit Tracker Application </h1></li>

@@ -24,18 +24,18 @@
 
              <li> 
                    
-                <div id="content-div">
+                <div class="border-class" id="content-div">
                     <%= habit.content %>
                         
                 </div>
                   
-                <div id="status-div"> 
+                <div class="border-class" id="status-div"> 
                         <% for(let i=0; i< 7; i++){ %>
 
-                        <div class="weekDays">
+                        <div  class="weekDays">
                             <small><%= weekNames[i] %></small>
                             <small class="status">
-                                <div>
+                                <div class="border-class">
                                     <a href="/habit/status/?day=<%= i%>&habitId=<%=habit.id %>&date=<%= habit.currentStatus[i].date %>">                                
                                          <% if(habit.currentStatus[i].state == "false" ){ %>
                                             
@@ -53,7 +53,7 @@
                         <% } %>
                     </div>
                 
-                <div id="fav_delete-div">
+                <div class="border-class" id="fav_delete-div">
 
                     <small><a href="/habit/favourite/<%= habit._id %>">
                         <% if(habit.favourite == true){ %>

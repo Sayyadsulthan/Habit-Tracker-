@@ -21,6 +21,7 @@ module.exports.dashBoardIndex = async function (req, res) {
 }
 
 module.exports.create = async function (req, res) {
+    
     try {
 
         if (req.user) {
@@ -91,15 +92,16 @@ module.exports.faovurite = async function (req, res) {
             let habit = await Habit.findById(req.params.id);
             switch (habit.favourite) {
                 case true: {
+                    console.log(habit.favourite);
                     habit.favourite = false;
                     habit.save();
-                    req.flash('success', "habit added to favourite ...")
+                    req.flash('success', "habit removed from favourite ...")
                     return res.redirect('back');
                 }
                 case false: {
                     habit.favourite = true;
                     habit.save();
-                    req.flash('success', "habit removed from favourite ...")
+                    req.flash('success', "habit added to favourite ...")
                     return res.redirect('back');
                 }
             }

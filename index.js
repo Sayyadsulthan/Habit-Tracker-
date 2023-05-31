@@ -19,10 +19,11 @@ app.use(expressLayouts);
 
 app.use(express.static('./assets'));
 
+// setting the partial script an styles 
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
-
+// setup the views and view engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
@@ -47,7 +48,7 @@ app.use(session({
     )
 }));
 
-
+// initializing the passport and flash
 app.use(passport.initialize());
 app.use(passport.session());
 

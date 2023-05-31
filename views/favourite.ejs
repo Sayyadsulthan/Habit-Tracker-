@@ -5,9 +5,7 @@
 </a></h1>
 <section>
     <% let checkexist_fav = false %>
-    <% for(habit of habits){ %>
-        <% if(habit.favourite == true){ %>
-            <% checkexist_fav = true %>
+    
         <div id="status-details-main">
             <div class="status-details-child">
                 <small>Completed status:</small>
@@ -25,6 +23,9 @@
         <ul>
             
             <% for(habit of habits){ %>
+                <% if(habit.favourite == true){ %>
+                <% checkexist_fav = true %>
+
 
                 <li> 
                     <p>
@@ -66,9 +67,9 @@
                 </p>
                 </li>
             <% } %>
+            <% } %>
         </ul>
-        <% } %>
-        <% } %>
+        
        <% if(!checkexist_fav){ %>
            <h1> Nothing is found in Favourite..</h1>
        <% } %>

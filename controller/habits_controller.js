@@ -92,19 +92,19 @@ module.exports.faovurite = async function (req, res) {
             let habit = await Habit.findById(req.params.id);
             switch (habit.favourite) {
                 case true: {
-                    console.log(habit.favourite);
                     habit.favourite = false;
                     habit.save();
                     req.flash('success', "habit removed from favourite ...")
-                    return res.redirect('back');
+                    break;
                 }
                 case false: {
                     habit.favourite = true;
                     habit.save();
                     req.flash('success', "habit added to favourite ...")
-                    return res.redirect('back');
+                    
                 }
             }
+            return res.redirect('back');
         }
 
         req.flash('error', "Internal server ERR***")
@@ -136,7 +136,7 @@ module.exports.status = async function (req, res) {
                 case "false": {
                     habit.currentStatus[day].state = "undefine";
                     habit.save();
-                    req.flash('error', 'habit Not Completed!!');
+                    req.flash('error', 'habit still in pending!!');
                     return res.redirect('back');
                 }
                 default: {

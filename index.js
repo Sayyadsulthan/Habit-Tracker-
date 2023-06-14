@@ -1,7 +1,6 @@
 const express = require('express');
-const env = require('dotenv');
+ require('dotenv').config();
 
-env.config();
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -42,7 +41,7 @@ app.use(session({
     store: MongoStore.create(
         {
             
-            mongoUrl: "mongodb+srv://asulthan088:12345@newcluster.pvhb9aa.mongodb.net/newproject?retryWrites=true&w=majority",
+            mongoUrl: process.env.DB_URI,
             autoRemove: 'disabled'
         }
     )

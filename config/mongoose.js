@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 mongoose
-    .connect(`mongodb+srv://asulthan088:12345@newcluster.pvhb9aa.mongodb.net/newproject?retryWrites=true&w=majority`)
+    .connect(process.env.DB_URI)
     .then(()=>console.log("db connectionsuccesfull.."))
     .catch((err)=>console.log("err in db: ", err))
 
